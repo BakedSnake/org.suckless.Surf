@@ -46,6 +46,8 @@ modules:
         branch: master
       - type: shell
         commands:
+          - sed -i 's|#222222|#506090|' ./config.def.h
+          - sed -i 's|#005577|#75afff|' ./config.def.h
           - sed -i 's|/usr/local|/app|' ./config.mk
   - name: surf
     no-autogen: true
