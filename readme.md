@@ -9,7 +9,7 @@ Install Luakit with flatpak.
 #### Installation
 Download the script and install it with flatpak-builder.
 ```
-git clone https://github.com/bakedsnake/org.suckless.Surf
+git clone https://github.com/bakedsnake/org.suckless.Surf.git
 cd org.suckless.Surf
 mkdir build
 flatpak-builder --user --install ./build org.suckless.Surf.yml
