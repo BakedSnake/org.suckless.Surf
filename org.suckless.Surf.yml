@@ -82,3 +82,9 @@ modules:
       - type: shell
         commands:
           - sed -i 's|/usr/local|/app|' ./config.mk
+      - type: file
+        url: http://surf.suckless.org/patches/web-search/surf-websearch-20190510-d068a38.diff
+        sha256: 5fac3c3c8b5551b6d2e29323751b0dd41bd0febdabc65c3d7be6a5e91521d8df 
+      - type: shell
+        commands:
+          - patch -p1 < surf-websearch-20190510-d068a38.diff
