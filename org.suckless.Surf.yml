@@ -1,0 +1,61 @@
+app-id: org.suckless.Surf
+runtime: org.gnome.Platform
+runtime-version: '3.34'
+sdk: org.gnome.Sdk
+command: surf 
+finish-args:
+  - --share=network
+  - --share=ipc
+  - --device=dri
+  - --socket=x11
+  - --socket=pulseaudio
+  - --filesystem=home:ro
+  - --filesystem=xdg-config:rw
+  - --filesystem=xdg-cache:rw
+  - --filesystem=xdg-data:rw
+  - --talk-name=org.gtk.vfs.*
+  - --filesystem=xdg-run/gvfsd
+  - --filesystem=xdg-run/dconf
+  - --filesystem=~/.config/dconf:ro
+  - --talk-name=ca.desrt.dconf
+  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
+modules:
+  - name: xprop 
+    sources:
+      - type: git
+        url: https://github.com/freedesktop/xprop.git 
+        branch: master 
+  - name: libxft 
+    sources:
+      - type: git
+        url: https://github.com/freedesktop/libXft.git 
+        branch: master 
+  - name: libXinerama 
+    sources:
+      - type: git
+        url: https://github.com/freedesktop/libXinerama.git 
+        branch: master 
+  - name: dmenu 
+    no-autogen: true
+    buildsystem: simple
+    build-commands:
+      - CC=gcc CFLAGS='-Wall -std=c99 -pthread' make && make install
+    sources:
+      - type: git
+        url: https://git.suckless.org/dmenu
+        branch: master
+      - type: shell
+        commands:
+          - sed -i 's|/usr/local|/app|' ./config.mk
+  - name: surf
+    no-autogen: true
+    buildsystem: simple 
+    build-commands:
+      - CC=gcc CFLAGS='-Wall -std=c99 -pthread' make && make install
+    sources:
+      - type: archive
+        url: http://dl.suckless.org/surf/surf-2.1.tar.gz
+        sha256: 72e582920ba25a646203e93c2d2331d87f03037a28894d6c7e99af00ee043257
+      - type: shell
+        commands:
+          - sed -i 's|/usr/local|/app|' ./config.mk
