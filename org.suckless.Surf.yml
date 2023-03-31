@@ -2,7 +2,7 @@ app-id: org.suckless.Surf
 runtime: org.gnome.Platform
 runtime-version: '3.34'
 sdk: org.gnome.Sdk
-command: surf 
+command: /app/tabbedsurf 
 finish-args:
   - --share=network
   - --share=ipc
@@ -35,6 +35,7 @@ modules:
       - type: git
         url: https://github.com/freedesktop/libXinerama.git 
         branch: master 
+  
   - name: dmenu 
     no-autogen: true
     buildsystem: simple
@@ -49,6 +50,26 @@ modules:
           - sed -i 's|#222222|#506090|' ./config.def.h
           - sed -i 's|#005577|#75afff|' ./config.def.h
           - sed -i 's|/usr/local|/app|' ./config.mk
+  
+  - name: tabbed 
+    no-autogen: true
+    buildsystem: simple
+    build-commands:
+      - CC=gcc CFLAGS='-Wall -std=c99 -pthread' make && make install
+    sources:
+      - type: git
+        url: https://git.suckless.org/tabbed
+        branch: master
+      - type: shell
+        commands:
+          - sed -i 's|#222222|#506090|' ./config.def.h
+          - sed -i 's|#555555|#75afff|' ./config.def.h
+          - sed -i 's|/usr/local|/app|' ./Makefile
+          - touch $FLATPAK_DEST/tabbedsurf
+          - echo '#!/bin/bash' > $FLATPAK_DEST/tabbedsurf
+          - echo 'exec tabbed surf -e "$@"' >> $FLATPAK_DEST/tabbedsurf
+          - chmod +x $FLATPAK_DEST/tabbedsurf
+  
   - name: surf
     no-autogen: true
     buildsystem: simple 
