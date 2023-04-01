@@ -87,4 +87,10 @@ modules:
         sha256: 5fac3c3c8b5551b6d2e29323751b0dd41bd0febdabc65c3d7be6a5e91521d8df 
       - type: shell
         commands:
-          - patch -p1 < surf-websearch-20190510-d068a38.diff
+          - patch -p1 -F 20 < surf-websearch-20190510-d068a38.diff
+      - type: file
+        url: http://surf.suckless.org/patches/bookmarking/surf-bookmarks-20170722-723ff26.diff 
+        sha256: 1220497722d9726db6a67b8dfcda90c61f26cf1f7a7724974efbdc84f32b6281 
+      - type: shell
+        commands:
+          - patch -p1 -F 20 < surf-bookmarks-20170722-723ff26.diff 
