@@ -49,16 +49,30 @@ modules:
     sources:
       - type: git
         url: https://git.suckless.org/tabbed
-        branch: master
+        branch: 0.7 
       - type: shell
         commands:
           - sed -i 's|#222222|#506090|' ./config.def.h
           - sed -i 's|#555555|#75afff|' ./config.def.h
-          - sed -i 's|/usr/local|/app|' ./Makefile
+          - sed -i 's|/usr/local|/app|' ./config.mk
           - touch $FLATPAK_DEST/tabbedsurf
           - echo '#!/bin/bash' > $FLATPAK_DEST/tabbedsurf
           - echo 'exec tabbed surf -e "$@"' >> $FLATPAK_DEST/tabbedsurf
           - chmod +x $FLATPAK_DEST/tabbedsurf
+      - type: file
+        url: https://tools.suckless.org/tabbed/patches/keyrelease/tabbed-keyrelease-20191216-b5f9ec6.diff 
+        sha256: 0146751f162329dba62ce42e1f00305d84d3d0ccc62e2253c44af21a5dd28efa 
+      - type: shell
+        commands:
+          - patch -p1 -F 20 < tabbed-keyrelease-20191216-b5f9ec6.diff
+      - type: file
+        url: https://tools.suckless.org/tabbed/patches/hidetabs/tabbed-hidetabs-20191216-b5f9ec6.diff
+        sha256: f26ce359c20fa169169d9addb72c04d0b4b9cd4b4b3ef956a08f943264caf17e
+      - type: shell
+        commands:
+          - sed -i 's|static int bh, wx, wy, ww, wh;|static int bh, obh, wx, wy, ww, wh;|' tabbed-hidetabs-20191216-b5f9ec6.diff 
+          - sed -i 's|static int bh, wx, wy, ww, wh, vbh;|static int bh, obh, wx, wy, ww, wh, vbh;|' tabbed-hidetabs-20191216-b5f9ec6.diff 
+          - patch -p1 -F 20 < tabbed-hidetabs-20191216-b5f9ec6.diff
   
   - name: surf
     no-autogen: true
