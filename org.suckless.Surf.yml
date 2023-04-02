@@ -1,6 +1,6 @@
 app-id: org.suckless.Surf
 runtime: org.gnome.Platform
-runtime-version: '3.34'
+runtime-version: '3.34' 
 sdk: org.gnome.Sdk
 command: /app/tabbedsurf 
 finish-args:
@@ -23,28 +23,18 @@ modules:
   - name: xprop 
     sources:
       - type: git
-        url: https://github.com/freedesktop/xprop.git 
-        branch: master 
-  - name: libxft 
-    sources:
-      - type: git
-        url: https://github.com/freedesktop/libXft.git 
-        branch: master 
-  - name: libXinerama 
-    sources:
-      - type: git
-        url: https://github.com/freedesktop/libXinerama.git 
-        branch: master 
+        url: https://gitlab.freedesktop.org/xorg/app/xprop.git 
+        branch: xprop-1.2.6 
   
   - name: dmenu 
     no-autogen: true
     buildsystem: simple
     build-commands:
-      - CC=gcc CFLAGS='-Wall -std=c99 -pthread' make && make install
+      - CC=gcc CFLAGS='-Wall -std=c99 -pthread' make && make clean install
     sources:
       - type: git
         url: https://git.suckless.org/dmenu
-        branch: master
+        branch: 5.1 
       - type: shell
         commands:
           - sed -i 's|#222222|#506090|' ./config.def.h
@@ -76,9 +66,9 @@ modules:
     build-commands:
       - CC=gcc CFLAGS='-Wall -std=c99 -pthread' make && make install
     sources:
-      - type: archive
-        url: http://dl.suckless.org/surf/surf-2.1.tar.gz
-        sha256: 72e582920ba25a646203e93c2d2331d87f03037a28894d6c7e99af00ee043257
+      - type: git
+        url: https://git.suckless.org/surf
+        branch: 2.1 
       - type: shell
         commands:
           - sed -i 's|/usr/local|/app|' ./config.mk
@@ -88,6 +78,7 @@ modules:
       - type: shell
         commands:
           - patch -p1 -F 20 < surf-websearch-20190510-d068a38.diff
+          - sed -i 's|xprop -id $1 -f $2 8u -set $2|xprop -id $1 -f $2 8s -set $2|' ./config.def.h
       - type: file
         url: http://surf.suckless.org/patches/bookmarking/surf-bookmarks-20170722-723ff26.diff 
         sha256: 1220497722d9726db6a67b8dfcda90c61f26cf1f7a7724974efbdc84f32b6281 
