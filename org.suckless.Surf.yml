@@ -9,7 +9,7 @@ finish-args:
   - --device=dri
   - --socket=x11
   - --socket=pulseaudio
-  - --filesystem=home:ro
+  - --filesystem=~/.surf:rw
   - --filesystem=xdg-config:rw
   - --filesystem=xdg-cache:rw
   - --filesystem=xdg-data:rw
