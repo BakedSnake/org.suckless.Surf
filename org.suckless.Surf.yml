@@ -99,3 +99,4 @@ modules:
       - type: shell
         commands:
           - patch -p1 -F 20 < surf-bookmarks-20170722-723ff26.diff 
+          - sed -i '/Inspector/c\	\[Inspector\]           =       { { .i = 1 },     },' ./config.def.h
