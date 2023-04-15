@@ -1,10 +1,9 @@
 ### Surf Browser Flatpak 
-Install Luakit with flatpak.
+Surf with tabbed, bookmarks and websearch.
 
 #### Dependencies
+* flatpak
 * flatpak-builder
-
-( Might create a repo in the future, but for now flatpak-builder it is. ).
 
 #### Installation
 Download the script and install it with flatpak-builder.
@@ -19,6 +18,21 @@ flatpak-builder --user --install ./build org.suckless.Surf.yml
 Now you should be able to see it in your flatpak list, and should be able to run it like any other flatpak package:
 ```
 flatpak run org.suckless.Surf 
+```
+
+##### Keybindings
+```
+Url: Ctrl + g
+Web search: Ctrl + s
+Bookmark: Ctrl + m
+Find: Ctrl + f or Ctrl + /
+Scroll down: Ctrl + j
+Scroll up: Ctrl + k
+Show tabs: Ctrl + Shift
+New tab: Ctrl + Shift + Enter
+Select tab: Ctrl + < tab number >
+Move tab to right: Ctrl + Shift + j
+Move tab to left: Ctrl + Shift + k
 ```
 
 Happy browsing (:
