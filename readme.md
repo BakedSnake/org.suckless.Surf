@@ -26,13 +26,18 @@ Url: Ctrl + g
 Web search: Ctrl + s
 Bookmark: Ctrl + m
 Find: Ctrl + f or Ctrl + /
+
 Scroll down: Ctrl + j
 Scroll up: Ctrl + k
+Zoom in: Ctrl + "]"
+Zoom out: Ctrl + "["
+
 Show tabs: Ctrl + Shift
 New tab: Ctrl + Shift + Enter
 Select tab: Ctrl + < tab number >
 Move tab to right: Ctrl + Shift + j
 Move tab to left: Ctrl + Shift + k
+Close tab: Ctrl + q
 ```
 
 Happy browsing (:

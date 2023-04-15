@@ -99,4 +99,8 @@ modules:
       - type: shell
         commands:
           - patch -p1 -F 20 < surf-bookmarks-20170722-723ff26.diff 
+          # Enable Inspector
           - sed -i '/Inspector/c\	\[Inspector\]           =       { { .i = 1 },     },' ./config.def.h
+          # Zoom keys
+          - sed -i '175i \\t{ MODKEY,GDK_KEY_bracketleft,            zoom,       { .i = -1 } },' ./config.def.h
+          - sed -i '175i \\t{ MODKEY,GDK_KEY_bracketright,           zoom,       { .i = +1 } },' ./config.def.h
